@@ -47,8 +47,10 @@ set.seed(234578)
 #box$column_name = as.factor(box$column_name)
 
 #starting Random Forest
+
 #can specify type of random forest using type="regression"
 #can alter number of trees using ntree=#
+#using wins as the response variable
 rf <- randomForest(wins~.,data=new,ntree=500,)
 print(rf)
 
@@ -68,7 +70,7 @@ print(best.m)
 #building model using best mtry value
 #can change mtry manually
 set.seed(234578)
-rf <-randomForest(wins~., data=new, mtry=7, importance=TRUE, ntree=500)
+rf <-randomForest(wins~., data=new, mtry=best.m, importance=TRUE, ntree=500)
 print(rf)
 
 #Evaluate variable importance
@@ -81,34 +83,34 @@ varImpPlot(rf)
 #using random forest explainer
 
 #measuring variable importance
-importance_frame <- measure_importance(rf)
+#importance_frame <- measure_importance(rf)
 
 #ploting multi-way importance plot for variables
-plot_multi_way_importance(importance_frame, size_measure = "no_of_nodes")
+#plot_multi_way_importance(importance_frame, size_measure = "no_of_nodes")
 
 #comparing measures
-plot_importance_ggpairs(importance_frame)
+#plot_importance_ggpairs(importance_frame)
 
 #comparing different rankings
-plot_importance_rankings(importance_frame)
+#plot_importance_rankings(importance_frame)
 
 ################################################################
 
 #prediction and calculation of performance metrics
 #used only to see accuracy if using classification method
-pred1=predict(rf,type = "prob")
-perf = prediction(pred1[,], box$pts)
+#pred1=predict(rf,type = "prob")
+#perf = prediction(pred1[,], box$pts)
 
 # 1. Area under curve
-auc = performance(perf, "auc")
-auc
+#auc = performance(perf, "auc")
+#auc
 
 # 2. True Positive and Negative Rate
-pred3 = performance(perf, "tpr","fpr")
+#pred3 = performance(perf, "tpr","fpr")
 
 # 3. Plot the ROC curve
-plot(pred3,main="ROC Curve for Random Forest",col=2,lwd=2)
-abline(a=0,b=1,lwd=2,lty=2,col="gray")
+#plot(pred3,main="ROC Curve for Random Forest",col=2,lwd=2)
+#abline(a=0,b=1,lwd=2,lty=2,col="gray")
 
 ###########################################################
 
