@@ -1,11 +1,11 @@
 box <- read.csv('boxs.csv')
 
-w1 = 0.60
-w2 = 0.17
+w1 = 0.55
+w2 = 0.19
 w3 = 0.10
-w4 = 0.06
-w5 = 0.04
-w6 = 0.03
+w4 = 0.07
+w5 = 0.05
+w6 = 0.04
 #it may be cleaner to instead just manually input the
   #weight values into the score formula seen later
 #these are just hypothetical weights right now for testing
