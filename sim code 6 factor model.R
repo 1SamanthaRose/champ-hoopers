@@ -1,10 +1,10 @@
 box <- read.csv('boxs.csv')
 
-w1 = 0.55
-w2 = 0.19
-w3 = 0.10
-w4 = 0.07
-w5 = 0.05
+w1 = 0.51
+w2 = 0.17
+w3 = 0.08
+w4 = 0.11
+w5 = 0.09
 w6 = 0.04
 #it may be cleaner to instead just manually input the
   #weight values into the score formula seen later
@@ -59,12 +59,18 @@ while (seriesCount < 10000) { #iterates 10,000 times
     p4A = gameA$drebp
     p5A = gameA$blk
     p6A = gameA$ftp
+    if (p6A == 0) {
+      p6A = 0.0000000000001
+      }
     p1B = gameB$efgp
     p2B = gameB$tovp
     p3B = gameB$stl
     p4B = gameB$drebp
     p5B = gameB$blk
     p6B = gameB$ftp
+    if (p6B == 0) {
+      p6B = 0.0000000000001
+      }
   #this adds together all of Team A's stats in proportion to the total stats
   #for both teams, weighing them appropriately. This will always sum to an amount from 0 to 1.
   #w1-4 are the standardized weights for the respective predictors
