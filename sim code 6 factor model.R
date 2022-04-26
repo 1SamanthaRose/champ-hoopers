@@ -2,14 +2,12 @@ box <- read.csv('boxs.csv')
 
 w1 = 0.51
 w2 = 0.17
-w3 = 0.08
-w4 = 0.11
-w5 = 0.09
+w3 = 0.11
+w4 = 0.09
+w5 = 0.08
 w6 = 0.04
 #it may be cleaner to instead just manually input the
   #weight values into the score formula seen later
-#these are just hypothetical weights right now for testing
-  #the code
 
 #separates each team into its own dataset
   #there is probably a cleaner way to do this
@@ -50,24 +48,22 @@ while (seriesCount < 10000) { #iterates 10,000 times
     gameA = teamA[sample(1:nrow(teamA), 1),] 
     gameB = teamB[sample(1:nrow(teamB), 1),]
   #the values of important predictors as indicated by the forest, for that game
-  #the predictors listed there right now are just for testing
-    #this code, not necessarily the ones that will be used
-  #might not necessarily use exactly 4
     p1A = gameA$efgp
     p2A = gameA$tovp
-    p3A = gameA$stl
-    p4A = gameA$drebp
-    p5A = gameA$blk
-    p6A = gameA$ftp
+    p3A = gameA$drebp
+    p4A = gameA$ftp
+    p5A = gameA$stl
+    p6A = gameA$blk
     if (p6A == 0) {
       p6A = 0.0000000000001
-      }
+      } #occasionally both teams have zero blocks, so this offsets a division by zero error
+        #in the following section
     p1B = gameB$efgp
     p2B = gameB$tovp
-    p3B = gameB$stl
-    p4B = gameB$drebp
-    p5B = gameB$blk
-    p6B = gameB$ftp
+    p3B = gameB$drebp
+    p4B = gameB$ftp
+    p5B = gameB$stl
+    p6B = gameB$blk
     if (p6B == 0) {
       p6B = 0.0000000000001
       }
@@ -102,16 +98,12 @@ while (seriesCount < 10000) { #iterates 10,000 times
 ASerWon
 BSerWon
 #this reports the favored team and said team's win probability
-#right now it displays the message 82 times, i haven't figured out yet
-  #how to get it to display properly
 if (ASerWon > BSerWon) {
   winProb = ASerWon / 100
   paste(teamA[1,]$team, 'has a', winProb, '% win probability')
-}
-if (BSerWon > ASerWon) {
-  winProb = BSerWon / 100
-  paste(teamB[1,]$team, 'has a', winProb, '% win probability')
-}
-if (ASerWon == BSerWon) {
-  print('Could go either way, happy gambling!')
-}
+} else if (BSerWon > ASerWon) {
+    winProb = BSerWon / 100
+    paste(teamB[1,]$team, 'has a', winProb, '% win probability')
+    } else {
+        print('Could go either way, happy gambling!')
+        }
