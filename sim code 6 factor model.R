@@ -106,11 +106,11 @@ BSerWon
   #how to get it to display properly
 if (ASerWon > BSerWon) {
   winProb = ASerWon / 100
-  paste(teamA$team, 'has a', winProb, '% win probability')
+  paste(teamA[1,]$team, 'has a', winProb, '% win probability')
 }
 if (BSerWon > ASerWon) {
   winProb = BSerWon / 100
-  paste(teamB$team, 'has a', winProb, '% win probability')
+  paste(teamB[1,]$team, 'has a', winProb, '% win probability')
 }
 if (ASerWon == BSerWon) {
   print('Could go either way, happy gambling!')
