@@ -49,7 +49,8 @@ while (seriesCount < 10000) { #iterates 10,000 times
     gameB = teamB[sample(1:nrow(teamB), 1),]
   #the values of important predictors as indicated by the forest, for that game
     p1A = gameA$efgp
-    p2A = gameA$tovp
+    p2A = 100 - gameA$tovp #gives the percentage of possesions NOT resulting
+    #in a turnover
     p3A = gameA$drebp
     p4A = gameA$ftp
     p5A = gameA$stl
@@ -59,7 +60,7 @@ while (seriesCount < 10000) { #iterates 10,000 times
       } #occasionally both teams have zero blocks, so this offsets a division by zero error
         #in the following section
     p1B = gameB$efgp
-    p2B = gameB$tovp
+    p2B = 100 - gameB$tovp
     p3B = gameB$drebp
     p4B = gameB$ftp
     p5B = gameB$stl
