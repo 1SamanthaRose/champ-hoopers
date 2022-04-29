@@ -1,16 +1,17 @@
 box <- read.csv('boxs.csv')
 
-w1 = 0.39
-w2 = 0.18
-w3 = 0.14
-w4 = 0.11
-w5 = 0.14
-w6 = 0.04
-#it may be cleaner to instead just manually input the
-  #weight values into the score formula seen later
+#the weights of the six predictors, as determined by the
+#standardized importance scores given by the random forest,
+#rounded to two decimal places
+w1 = 0.39 #EFGP
+w2 = 0.18 #TOVP
+w3 = 0.11 #FTP
+w4 = 0.14 #DREBP
+w5 = 0.14 #STL
+w6 = 0.04 #BLK
 
-#separates each team into its own dataset
-  #there is probably a cleaner way to do this
+#separates each playoff team into its own dataset, for
+#easier access later
 mia <- box[ which(box$team=='MIA'),]
 atl <- box[ which(box$team=='ATL'),]
 phi <- box[ which(box$team=='PHI'),]
@@ -19,7 +20,6 @@ mil <- box[ which(box$team=='MIL'),]
 chi <- box[ which(box$team=='CHI'),]
 bos <- box[ which(box$team=='BOS'),]
 bkn <- box[ which(box$team=='BKN'),]
-
 phx <- box[ which(box$team=='PHX'),]
 nop <- box[ which(box$team=='NOP'),]
 dal <- box[ which(box$team=='DAL'),]
@@ -29,16 +29,15 @@ den <- box[ which(box$team=='DEN'),]
 mem <- box[ which(box$team=='MEM'),]
 min <- box[ which(box$team=='MIN'),]
 
-
 seriesCount = 0
 ASerWon = 0 #Keeps track of numbers of series won so far by each team
 BSerWon = 0
-while (seriesCount < 10000) { #iterates 10,000 times
-  teamA = mia
-  teamB = atl
+teamA = mia
+teamB = atl
     #insert teams of choice into here
     #the above part probably needs to be a function of some 
       #sort, but I haven't figured out how to do that yet
+while (seriesCount < 10000) { #iterates 10,000 times
   AGameWon = 0 #Keeps track of number of games won so far by
     #each team
   BGameWon = 0
@@ -49,10 +48,10 @@ while (seriesCount < 10000) { #iterates 10,000 times
     gameB = teamB[sample(1:nrow(teamB), 1),]
   #the values of important predictors as indicated by the forest, for that game
     p1A = gameA$efgp
-    p2A = 100 - gameA$tovp #gives the percentage of possesions NOT resulting
-    #in a turnover
-    p3A = gameA$drebp
-    p4A = gameA$ftp
+    p2A = 100 - gameA$tovp 
+    #gives the percentage of possesions NOT resulting in a turnover
+    p3A = gameA$ftp
+    p4A = gameA$drebp
     p5A = gameA$stl
     p6A = gameA$blk
     if (p6A == 0) {
@@ -61,8 +60,8 @@ while (seriesCount < 10000) { #iterates 10,000 times
         #in the following section
     p1B = gameB$efgp
     p2B = 100 - gameB$tovp
-    p3B = gameB$drebp
-    p4B = gameB$ftp
+    p3B = gameB$ftp
+    p4B = gameB$drebp
     p5B = gameB$stl
     p6B = gameB$blk
     if (p6B == 0) {
@@ -86,7 +85,7 @@ while (seriesCount < 10000) { #iterates 10,000 times
     if (score < 0.5) {
       BGameWon = BGameWon + 1
     }
-#nested while loop ends here once a team has won 4 sim games in the series
+  #nested while loop ends here once a team has won 4 sim games in the series
   }
   if (AGameWon > BGameWon) {
     ASerWon = ASerWon + 1
@@ -95,9 +94,8 @@ while (seriesCount < 10000) { #iterates 10,000 times
     BSerWon = BSerWon + 1
   }
   seriesCount = seriesCount + 1
-}#outer loop ends once 10,000 series have been simulated
-ASerWon
-BSerWon
+#outer loop ends once 10,000 series have been simulated
+}
 #this reports the favored team and said team's win probability
 if (ASerWon > BSerWon) {
   winProb = ASerWon / 100
