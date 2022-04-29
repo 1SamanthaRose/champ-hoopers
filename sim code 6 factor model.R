@@ -33,10 +33,10 @@ den <- box[ which(box$team=='DEN'),]
 mem <- box[ which(box$team=='MEM'),]
 min <- box[ which(box$team=='MIN'),]
 
-seriesCount = 0
-ASerWon = 0 #Keeps track of numbers of series won so far by each team
-BSerWon = 0
 simSeries <- function(teamA, teamB) { #insert teams of choice into here
+  ASerWon = 0 #Keeps track of numbers of series won so far by each team
+  BSerWon = 0
+  seriesCount = 0
   while (seriesCount < 10001) { #iterates 10,001 times
     AGameWon = 0 #Keeps track of number of games won so far by
     #each team
