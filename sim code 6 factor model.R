@@ -1,8 +1,7 @@
-#made it into a function
-#cleaned up the part at the end that prints the result
-#there are now 10,001 simulations to avoid the chance of a tie
-
+#reads the box score data, and subsets it into a data set with
+#only the team names and the six predictors we will be using
 box <- read.csv('boxs.csv')
+box6 <- box[,c(1, 35, 34, 15, 32, 20, 21)]
 
 #the weights of the six predictors, as determined by the
 #standardized importance scores given by the random forest,
@@ -16,22 +15,22 @@ w6 = 0.04 #BLK
 
 #separates each playoff team into its own dataset, for
 #easier access later
-mia <- box[ which(box$team=='MIA'),]
-atl <- box[ which(box$team=='ATL'),]
-phi <- box[ which(box$team=='PHI'),]
-tor <- box[ which(box$team=='TOR'),]
-mil <- box[ which(box$team=='MIL'),]
-chi <- box[ which(box$team=='CHI'),]
-bos <- box[ which(box$team=='BOS'),]
-bkn <- box[ which(box$team=='BKN'),]
-phx <- box[ which(box$team=='PHX'),]
-nop <- box[ which(box$team=='NOP'),]
-dal <- box[ which(box$team=='DAL'),]
-uta <- box[ which(box$team=='UTA'),]
-gsw <- box[ which(box$team=='GSW'),]
-den <- box[ which(box$team=='DEN'),]
-mem <- box[ which(box$team=='MEM'),]
-min <- box[ which(box$team=='MIN'),]
+mia <- box6[ which(box6$team=='MIA'),]
+atl <- box6[ which(box6$team=='ATL'),]
+phi <- box6[ which(box6$team=='PHI'),]
+tor <- box6[ which(box6$team=='TOR'),]
+mil <- box6[ which(box6$team=='MIL'),]
+chi <- box6[ which(box6$team=='CHI'),]
+bos <- box6[ which(box6$team=='BOS'),]
+bkn <- box6[ which(box6$team=='BKN'),]
+phx <- box6[ which(box6$team=='PHX'),]
+nop <- box6[ which(box6$team=='NOP'),]
+dal <- box6[ which(box6$team=='DAL'),]
+uta <- box6[ which(box6$team=='UTA'),]
+gsw <- box6[ which(box6$team=='GSW'),]
+den <- box6[ which(box6$team=='DEN'),]
+mem <- box6[ which(box6$team=='MEM'),]
+min <- box6[ which(box6$team=='MIN'),]
 
 simSeries <- function(teamA, teamB) { #insert teams of choice into here
   ASerWon = 0 #Keeps track of numbers of series won so far by each team
@@ -85,7 +84,7 @@ simSeries <- function(teamA, teamB) { #insert teams of choice into here
         if (score < 0.5) {
             BGameWon = BGameWon + 1
         }
-  #nested while loop ends here once a team has won 4 sim games in the series
+  #nested while loop ends here once a team has won four sim games in the series
     }
     if (AGameWon > BGameWon) {
         ASerWon = ASerWon + 1
