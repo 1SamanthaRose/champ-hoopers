@@ -73,8 +73,7 @@ set.seed(234578)
 rf <-randomForest(wins~., data=new, mtry=best.m, importance=TRUE, ntree=500)
 print(rf)
 
-#this is the model I'm currently using
-set.seed(234578)
+#final model
 rf <-randomForest(wins ~ stl + off_tovp + off_efgp + blk
 + def_efgp + def_tovp + def_rp + ftp, data=new, mtry=2, importance=TRUE, ntree=500)
 
