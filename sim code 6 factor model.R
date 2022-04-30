@@ -33,12 +33,13 @@ mem <- box6[ which(box6$team=='MEM'),]
 min <- box6[ which(box6$team=='MIN'),]
 
 simSeries <- function(teamA, teamB) { #insert teams of choice into here
-  ASerWon = 0 #Keeps track of numbers of series won so far by each team
+  #Keeps track of numbers of series won so far by each team
+  ASerWon = 0 
   BSerWon = 0
   seriesCount = 0
   while (seriesCount < 10001) { #iterates 10,001 times
-    AGameWon = 0 #Keeps track of number of games won so far by
-    #each team
+    #Keeps track of number of games won so far by each team
+    AGameWon = 0 
     BGameWon = 0
     while ((AGameWon < 4) & (BGameWon < 4)) { #iterates until one team has won 4 games 
         #randomly samples a regular season game for team A
@@ -86,8 +87,7 @@ simSeries <- function(teamA, teamB) { #insert teams of choice into here
         }
     #nested while loop ends here once a team has won four sim games in the series
     }
-    #increments the total of series won for the team that won four games, then returns 
-    #to the first loop, #resetting the games won counters and doing this all again
+    #increments the total series won for the team that won four games
     if (AGameWon > BGameWon) {
         ASerWon = ASerWon + 1
     }
