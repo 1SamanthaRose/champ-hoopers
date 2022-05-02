@@ -77,33 +77,35 @@
 
 #Creating out df to plot each trial
 
+library(ggplot2)
+
 Trial <- c(1,2,3,4,5,6,7,8,9,10)
 Memphis_Probability <- c(60.21, 60.25,59.71, 59.84, 59.77, 60.62, 60.35, 59.51, 60.38, 60.24)
 Minneapolis_Probability <- c(39.80, 39.76, 40.30, 40.17, 40.24, 39.39, 39.66, 40.5, 39.63, 39.77)
 trialdf <- data.frame(Trial, Memphis_Probability, Minneapolis_Probability)
 
-view(trialdf)
+View(trialdf)
 
 #Histogram of The Trials
 
 q <- ggplot(trialdf) +
-  geom_line(aes(Trial, Memphis_Probability), color = "purple", size = 1.25) +
-  geom_line(aes(Trial, Minneapolis_Probability), color = "blue", size = 1.25) +
+  geom_line(aes(Trial, Memphis_Probability), color = "purple", size = 1) +
+  geom_line(aes(Trial, Minneapolis_Probability), color = "blue", size = 1) +
   coord_cartesian(ylim = c(0,100)) +
   labs(title = "Comparing Run Results-How Precise Are We?", xlab = "Probability") +
   theme(panel.background = element_rect(fill = 'ghostwhite', color = 'ghostwhite'),
-        panel.grid.major = element_line(color = 'grey', linetype = 'dotted'),
+        panel.grid.major = element_line(color = 'black', linetype = 'dotted'),
         panel.grid.minor = element_line(color = 'ivory', linetype = 'dotted'))
 q
 
 
 g <- ggplot(trialdf) +
-  geom_line(aes(Trial, Memphis_Probability), color = "purple", size = 1.25) +
-  geom_line(aes(Trial, Minneapolis_Probability), color = "blue", size = 1.25) +
-  coord_cartesian(ylim = c(30,70)) +
+  geom_line(aes(Trial, Memphis_Probability), color = "purple", size = 1) +
+  geom_line(aes(Trial, Minneapolis_Probability), color = "blue", size = 1) +
+  coord_cartesian(ylim = c(35,65)) +
   labs(title = "Comparing Run Results-How Precise Are We?", xlab = "Probability") +
   theme(panel.background = element_rect(fill = 'ghostwhite', color = 'ghostwhite'),
-        panel.grid.major = element_line(color = 'grey', linetype = 'dotted'),
+        panel.grid.major = element_line(color = 'black', linetype = 'dotted'),
         panel.grid.minor = element_line(color = 'ivory', linetype = 'dotted'),
         text = element_text(family = "Utopia"))
 g
