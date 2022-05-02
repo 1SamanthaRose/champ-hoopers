@@ -37,7 +37,7 @@ simSeries <- function(teamA, teamB) { #insert teams of choice into here
   ASerWon = 0 
   BSerWon = 0
   seriesCount = 0
-  while (seriesCount < 10001) { #iterates 10,001 times
+  while (seriesCount < 10000) { #iterates 10,000 times
     #Keeps track of number of games won so far by each team
     AGameWon = 0 
     BGameWon = 0
@@ -95,16 +95,24 @@ simSeries <- function(teamA, teamB) { #insert teams of choice into here
         BSerWon = BSerWon + 1
     }
     seriesCount = seriesCount + 1
-  #outer loop ends once 10,001 series have been simulated
+  #outer loop ends once 10,000 series have been simulated
   }
-  #this reports the favored team's win probability, based on the proportion of 
+  #this reports each team's win probability, based on the proportion of 
   #series won by that team
   if (ASerWon > BSerWon) {
     winner = teamA
+    loser = teamB
   }
   if (ASerWon < BSerWon) {
     winner = teamB
+    loser = teamA
   }
-  winProb = max(ASerWon,BSerWon) / 100
-  paste(winner[1,]$team, 'has a', winProb, '% win probability')
+  if (ASerWon != BSerWon) {
+    winProb = max(ASerWon,BSerWon) / 100
+    loseProb = min(ASerWon,BSerWon) / 100
+    paste(winner[1,]$team, 'has a', winProb, '% win probability',
+    'and', loser[1,]$team, 'has a', loseProb, '% win probability')
+  } else {
+    print('Could go either way, happy gambling!')
+    }
 }#end of sim function
