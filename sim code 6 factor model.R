@@ -1,6 +1,6 @@
 #reads the box score data, and subsets it into a data set with only
 #the team names and the six predictors that we will be using
-box <- read.csv('boxs.csv')
+#box <- read.csv('boxs.csv')
 box6 <- box[,c(1, 35, 34, 15, 32, 20, 21)]
 
 #the weights of the six predictors, as determined by the
@@ -108,3 +108,5 @@ simSeries <- function(teamA, teamB) { #insert teams of choice into here
   winProb = max(ASerWon,BSerWon) / 100
   paste(winner[1,]$team, 'has a', winProb, '% win probability')
 }#end of sim function
+
+
