@@ -1,2 +1,2 @@
 # champ-hoopers
-Random Forest &amp; Linear Regression to Find out who will win the NBA Finals
+Using random forest and while loops to simulate the 2022 NBA finals. Who will be the champion?
