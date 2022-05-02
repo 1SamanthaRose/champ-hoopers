@@ -113,7 +113,7 @@ simSeries <- function(teamA, teamB) { #insert teams of choice into here
     paste(winner[1,]$team, 'has a', winProb, '% win probability',
     'and', loser[1,]$team, 'has a', loseProb, '% win probability')
   } else {
-    print('Could go either way, happy gambling!')
+    print('Could go either way, happy gambling!') 
     }
 }#end of sim function
 
