@@ -68,7 +68,7 @@ print(rf)
 
 ###################################  final model  ###################################
 rf<-randomForest(wins ~ stl + off_tovp + off_efgp + ftp + blk
-+ def_rp, data=teams, mtry=2, importance=TRUE, ntree=500)
++ def_rp, data=new, mtry=2, importance=TRUE, ntree=500)
 
 print(rf)
 
